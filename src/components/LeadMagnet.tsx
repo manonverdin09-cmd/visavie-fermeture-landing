@@ -4,9 +4,7 @@ import { z } from "zod";
 
 import { supabase } from "@/integrations/supabase/client";
 
-import guideAsset from "@/assets/guide-menuiserie.pdf.asset.json";
-
-const GUIDE_URL = guideAsset.url;
+const GUIDE_URL = "/guide-menuiserie-visavie-fermeture.pdf";
 
 const leadSchema = z.object({
   lastName: z.string().trim().min(1, "Votre nom est requis").max(100, "Nom trop long"),
