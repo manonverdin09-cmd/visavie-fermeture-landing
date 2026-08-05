@@ -284,8 +284,12 @@ function Index() {
         </div>
       </section>
 
+      {/* Lead magnet — guide gratuit */}
+      <LeadMagnet />
+
       {/* 4. OBJECTIONS + FAQ */}
       <section className="mx-auto max-w-3xl px-5 py-16 sm:py-20">
+
         <div className="space-y-4">
           {faq.map((f) => (
             <FaqItem key={f.question} question={f.question} answer={f.answer} />
