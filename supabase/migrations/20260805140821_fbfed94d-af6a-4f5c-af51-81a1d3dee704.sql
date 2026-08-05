@@ -1,0 +1,23 @@
+CREATE TABLE public.leads (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  last_name TEXT NOT NULL,
+  first_name TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  source TEXT NOT NULL DEFAULT 'guide-menuiserie',
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+
+GRANT INSERT ON public.leads TO anon;
+GRANT INSERT ON public.leads TO authenticated;
+GRANT ALL ON public.leads TO service_role;
+
+ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can submit a lead"
+ON public.leads FOR INSERT TO anon, authenticated
+WITH CHECK (
+  char_length(last_name) BETWEEN 1 AND 100
+  AND char_length(first_name) BETWEEN 1 AND 100
+  AND char_length(phone) BETWEEN 6 AND 30
+  AND char_length(source) <= 60
+);
