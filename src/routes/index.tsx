@@ -23,6 +23,8 @@ import real2 from "@/assets/real-2.jpg";
 import real3 from "@/assets/real-3.jpg";
 import { Counter } from "@/components/Counter";
 import { FaqItem } from "@/components/FaqItem";
+import { LeadMagnet } from "@/components/LeadMagnet";
+
 
 const CALENDLY = "https://calendly.com/visaviefermeture/visio-devis";
 const WHATSAPP = "https://wa.me/33652142690?text=Bonjour%2C%20je%20souhaite%20un%20devis%20gratuit";
@@ -282,8 +284,12 @@ function Index() {
         </div>
       </section>
 
+      {/* Lead magnet — guide gratuit */}
+      <LeadMagnet />
+
       {/* 4. OBJECTIONS + FAQ */}
       <section className="mx-auto max-w-3xl px-5 py-16 sm:py-20">
+
         <div className="space-y-4">
           {faq.map((f) => (
             <FaqItem key={f.question} question={f.question} answer={f.answer} />
