@@ -20,7 +20,7 @@ export function Counter({
     if (!node) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        if (!entries[0].isIntersecting || started.current) return;
+        if (!entries[0]?.isIntersecting || started.current) return;
         started.current = true;
         const start = performance.now();
         const tick = (now: number) => {
