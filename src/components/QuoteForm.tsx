@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, Loader2, Send } from "lucide-react";
 import { z } from "zod";
 
@@ -15,6 +15,8 @@ const projectTypes = [
   "Dépannage porte automatique",
   "Autre",
 ] as const;
+
+const PRO_TYPE = "Professionnel - sous-traitance de pose";
 
 const quoteSchema = z.object({
   name: z.string().trim().min(1, "Votre nom est requis").max(100, "Nom trop long"),
@@ -37,6 +39,12 @@ export function QuoteForm() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    const prefillPro = () => setForm((current) => ({ ...current, projectType: PRO_TYPE }));
+    window.addEventListener("visavie:prefill-pro", prefillPro);
+    return () => window.removeEventListener("visavie:prefill-pro", prefillPro);
+  }, []);
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
