@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Phone,
   Mail,
@@ -10,23 +10,24 @@ import {
   Blinds,
   Fence,
   Building2,
-  Star,
-  Video,
   Check,
   MessageCircle,
+  UserRound,
+  FileText,
+  BadgeCheck,
 } from "lucide-react";
 
-import logo from "@/assets/logo-visavie.png.asset.json";
-import heroImg from "@/assets/hero-pose.jpg";
+import heroImg from "@/assets/hero-menuiserie-sans-marque.jpg";
 import real1 from "@/assets/real-1.jpg";
 import real2 from "@/assets/real-2.jpg";
 import real3 from "@/assets/real-3.jpg";
 import { Counter } from "@/components/Counter";
 import { FaqItem } from "@/components/FaqItem";
 import { LeadMagnet } from "@/components/LeadMagnet";
+import { QuoteForm } from "@/components/QuoteForm";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteLogo } from "@/components/SiteLogo";
 
-
-const CALENDLY = "https://calendly.com/visaviefermeture/visio-devis";
 const WHATSAPP = "https://wa.me/33652142690?text=Bonjour%2C%20je%20souhaite%20un%20devis%20gratuit";
 
 export const Route = createFileRoute("/")({
@@ -60,16 +61,27 @@ const services = [
   { icon: ShieldCheck, label: "Dépannage portes automatiques" },
 ];
 
-const temoignages = [
+const engagements = [
   {
-    text: "Réactivité et efficacité au rendez-vous.",
-    author: "Client particulier — Montpellier",
+    icon: UserRound,
+    title: "Un interlocuteur unique",
+    text: "Michel vous suit du premier appel à la pose.",
   },
   {
-    text: "Qualité tant pour les relations humaines que pour le travail effectué.",
-    author: "Entreprise de TP — Nîmes",
+    icon: FileText,
+    title: "Devis gratuit et détaillé",
+    text: "Chiffré poste par poste, sans surprise.",
   },
-  { text: "Je recommande à 100/100.", author: "Client particulier — Lunel" },
+  {
+    icon: ShieldCheck,
+    title: "Pose conforme aux normes",
+    text: "DTU respectés, finitions soignées.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Assurance décennale",
+    text: "Contrat AMI 3F Assurances, attestation sur demande.",
+  },
 ];
 
 const faq = [
@@ -93,19 +105,14 @@ const faq = [
 function CtaButton({
   children,
   className = "",
-  href = CALENDLY,
+  href = "#devis",
 }: {
   children: React.ReactNode;
   className?: string;
   href?: string;
 }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`cta-btn hover:-translate-y-0.5 hover:brightness-110 ${className}`}
-    >
+    <a href={href} className={`cta-btn hover:-translate-y-0.5 hover:brightness-110 ${className}`}>
       {children}
     </a>
   );
@@ -114,26 +121,7 @@ function CtaButton({
 function Index() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header sticky */}
-      <header className="sticky top-0 z-50 border-b border-border/70 bg-background/95 backdrop-blur">
-        <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3">
-          <a href="#hero" className="flex min-w-0 items-center gap-2">
-            <img
-              src={logo.url}
-              alt="Logo VISAVIE Fermeture"
-              width={44}
-              height={44}
-              className="size-10 shrink-0 object-contain"
-            />
-            <span className="truncate font-display text-sm tracking-tight text-primary sm:text-base">
-              VISAVIE <span className="text-secondary">Fermeture</span>
-            </span>
-          </a>
-          <CtaButton className="shrink-0 px-4 py-2.5 text-[0.7rem] sm:px-6 sm:text-sm">
-            Devis gratuit
-          </CtaButton>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* 1. HERO */}
       <section id="hero" className="relative isolate overflow-hidden">
@@ -160,14 +148,14 @@ function Index() {
               Demandez votre DEVIS gratuit
             </CtaButton>
             <p className="mt-4 text-sm text-neutral">
-              Rendez-vous visio de 15 min — sans engagement.
+              Réponse sous 48 h — devis gratuit et sans engagement.
             </p>
           </div>
         </div>
       </section>
 
       {/* Services */}
-      <section className="mx-auto max-w-5xl px-5 py-16 sm:py-20">
+      <section id="services" className="mx-auto max-w-5xl scroll-mt-20 px-5 py-16 sm:py-20">
         <h2 className="text-center text-2xl sm:text-3xl">
           Particuliers <span className="text-primary">&</span> professionnels
         </h2>
@@ -191,27 +179,24 @@ function Index() {
         </div>
       </section>
 
-      {/* 2. PREUVES SOCIALES */}
-      <section className="bg-muted/60 py-16 sm:py-20">
+      {/* Engagements */}
+      <section id="engagements" className="scroll-mt-20 bg-muted/60 py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-5">
-          <h2 className="text-center text-2xl sm:text-3xl">Ils nous font confiance</h2>
-          <div className="mt-10 grid gap-5 sm:grid-cols-3">
-            {temoignages.map((t) => (
-              <figure
-                key={t.author}
-                className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-card)]"
+          <h2 className="text-center text-2xl sm:text-3xl">Nos engagements</h2>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {engagements.map((engagement) => (
+              <article
+                key={engagement.title}
+                className="rounded-lg border border-border bg-card p-6 shadow-[var(--shadow-card)]"
               >
-                <div className="flex gap-1" aria-label="5 étoiles sur 5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="size-4 fill-gold text-gold" aria-hidden="true" />
-                  ))}
-                </div>
-                <blockquote className="mt-4 text-[1.02rem] leading-relaxed text-foreground">
-                  « {t.text} »
-                </blockquote>
-                <figcaption className="mt-4 text-sm text-muted-foreground">{t.author}</figcaption>
-              </figure>
+                <engagement.icon className="size-7 text-primary" aria-hidden="true" />
+                <h3 className="mt-4 text-base text-foreground">{engagement.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{engagement.text}</p>
+              </article>
             ))}
+          </div>
+          <div className="mt-10 text-center">
+            <CtaButton className="px-7 py-4 text-sm">Parler de mon projet</CtaButton>
           </div>
         </div>
       </section>
@@ -254,16 +239,19 @@ function Index() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <CtaButton className="px-7 py-4 text-sm">Réserver ma visio</CtaButton>
+          <CtaButton className="px-7 py-4 text-sm">Demander mon devis</CtaButton>
         </div>
       </section>
 
       {/* Réalisations */}
-      <section className="bg-secondary py-16 sm:py-20">
+      <section id="ouvrages" className="scroll-mt-20 bg-secondary py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-5">
           <h2 className="text-center text-2xl text-secondary-foreground sm:text-3xl">
-            Nos <span className="text-gold">réalisations</span>
+            Les ouvrages que nous posons
           </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-neutral">
+            Illustrations des ouvrages que nous installons — photos de nos chantiers à venir
+          </p>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
               { src: real1, alt: "Baie coulissante aluminium noire posée sur une villa" },
@@ -288,7 +276,7 @@ function Index() {
       <LeadMagnet />
 
       {/* 4. OBJECTIONS + FAQ */}
-      <section className="mx-auto max-w-3xl px-5 py-16 sm:py-20">
+      <section id="faq" className="mx-auto max-w-3xl scroll-mt-20 px-5 py-16 sm:py-20">
 
         <div className="space-y-4">
           {faq.map((f) => (
@@ -314,44 +302,42 @@ function Index() {
         </ul>
       </section>
 
-      {/* 5. CTA FINAL */}
-      <section className="mx-auto max-w-3xl px-5 py-20 text-center">
-        <h2 className="text-3xl sm:text-4xl">Donnons vie à votre projet</h2>
-        <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-          Réservez un rendez-vous visio de démonstration : nous étudions ensemble vos ouvertures,
-          vos contraintes et vous repartez avec un devis gratuit, clair et détaillé.
-        </p>
-        <div className="mt-9">
-          <CtaButton className="w-full px-8 py-5 text-base sm:w-auto sm:text-xl">
-            <Video className="size-5" aria-hidden="true" />
-            Contactez-nous !
-          </CtaButton>
-        </div>
-        <div className="mt-8 flex flex-col items-center gap-3 text-sm text-muted-foreground">
-          <a href="tel:+33652142690" className="inline-flex items-center gap-2 hover:text-primary">
-            <Phone className="size-4 text-primary" aria-hidden="true" /> 06 52 14 26 90
-          </a>
-          <a
-            href="mailto:visaviefermeture@gmail.com"
-            className="inline-flex items-center gap-2 hover:text-primary"
-          >
-            <Mail className="size-4 text-primary" aria-hidden="true" /> visaviefermeture@gmail.com
-          </a>
+      {/* Devis */}
+      <section id="devis" className="scroll-mt-20 bg-muted/60 py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl px-5">
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl">Demandez votre devis gratuit</h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+              Décrivez votre projet. Michel vous répond sous 48 h avec une première estimation claire et sans engagement.
+            </p>
+          </div>
+          <div className="mt-10 rounded-lg border border-border bg-card p-6 shadow-[var(--shadow-card)] sm:p-8">
+            <QuoteForm />
+          </div>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href="tel:+33652142690" className="cta-btn px-6 py-4 text-sm">
+              <Phone className="size-4" aria-hidden="true" /> Appeler le 06 52 14 26 90
+            </a>
+            <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-md border border-primary px-6 py-4 text-sm font-bold text-primary hover:bg-accent">
+              <MessageCircle className="size-4" aria-hidden="true" /> WhatsApp
+            </a>
+          </div>
         </div>
       </section>
 
-      <footer className="border-t border-border bg-muted/50 py-10 text-center">
-        <img
-          src={logo.url}
-          alt="VISAVIE Fermeture"
-          width={64}
-          height={64}
-          loading="lazy"
-          className="mx-auto size-14 object-contain"
-        />
-        <p className="mt-3 font-display text-sm text-primary">VISAVIE Fermeture</p>
+      <footer className="border-t border-border bg-background py-10 text-center">
+        <SiteLogo className="mx-auto" />
         <p className="mt-1 text-sm text-muted-foreground">Magny Fomat Michel — Menuisier poseur</p>
         <p className="mt-1 text-xs text-muted-foreground">Hérault & Gard — Neuf et rénovation</p>
+        <p className="mt-3 text-xs text-muted-foreground">SIRET 94836674500016</p>
+        <p className="mt-1 text-xs text-muted-foreground">Assuré AMI 3F Assurances — garantie décennale</p>
+        <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs font-bold text-primary">
+          <Link to="/mentions-legales" className="hover:underline">Mentions légales</Link>
+          <Link to="/confidentialite" className="hover:underline">Politique de confidentialité</Link>
+          <a href="mailto:visaviefermeture@gmail.com" className="inline-flex items-center gap-1 hover:underline">
+            <Mail className="size-3.5" aria-hidden="true" /> Nous écrire
+          </a>
+        </div>
       </footer>
 
       {/* WhatsApp flottant */}
