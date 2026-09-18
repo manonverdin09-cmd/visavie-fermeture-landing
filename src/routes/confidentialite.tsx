@@ -6,9 +6,9 @@ import { SiteLogo } from "@/components/SiteLogo";
 export const Route = createFileRoute("/confidentialite")({
   head: () => ({
     meta: [
-      { title: "Politique de confidentialité — VISAVIE Fermeture" },
+      { title: "Politique de confidentialité | VISAVIE Fermeture" },
       { name: "description", content: "Politique de confidentialité et traitement des données personnelles par VISAVIE Fermeture." },
-      { property: "og:title", content: "Politique de confidentialité — VISAVIE Fermeture" },
+      { property: "og:title", content: "Politique de confidentialité | VISAVIE Fermeture" },
       { property: "og:description", content: "Découvrez comment VISAVIE Fermeture protège vos données personnelles." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -6,9 +6,9 @@ import { SiteLogo } from "@/components/SiteLogo";
 export const Route = createFileRoute("/mentions-legales")({
   head: () => ({
     meta: [
-      { title: "Mentions légales — VISAVIE Fermeture" },
+      { title: "Mentions légales | VISAVIE Fermeture" },
       { name: "description", content: "Mentions légales de VISAVIE Fermeture, menuisier poseur dans l'Hérault et le Gard." },
-      { property: "og:title", content: "Mentions légales — VISAVIE Fermeture" },
+      { property: "og:title", content: "Mentions légales | VISAVIE Fermeture" },
       { property: "og:description", content: "Informations légales de VISAVIE Fermeture." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -33,13 +33,13 @@ const WHATSAPP = "https://wa.me/33652142690?text=Bonjour%2C%20je%20souhaite%20un
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VISAVIE Fermeture — Menuisier poseur en Hérault et Gard" },
+      { title: "VISAVIE Fermeture, menuisier poseur en Hérault et Gard" },
       {
         name: "description",
         content:
           "Pose de fenêtres, portes, portails et volets en alu, PVC et bois. Neuf et rénovation, particuliers et professionnels. Devis gratuit sous 48 h.",
       },
-      { property: "og:title", content: "VISAVIE Fermeture — Menuisier poseur en Hérault et Gard" },
+      { property: "og:title", content: "VISAVIE Fermeture, menuisier poseur en Hérault et Gard" },
       {
         property: "og:description",
         content:
@@ -143,7 +143,7 @@ function Index() {
             Il vous manque le poseur.
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-neutral sm:text-xl">
-            Michel, menuisier poseur indépendant en Hérault et Gard. Alu, PVC, bois — neuf et
+            Michel, menuisier poseur indépendant en Hérault et Gard. Alu, PVC, bois. Neuf et
             rénovation, pour les particuliers comme pour les professionnels.
           </p>
           <div className="mt-10">
@@ -151,7 +151,7 @@ function Index() {
               Demandez votre DEVIS gratuit
             </CtaButton>
             <p className="mt-4 text-sm text-neutral">
-              Réponse sous 48 h — devis gratuit et sans engagement.
+              Réponse sous 48 h, devis gratuit et sans engagement.
             </p>
             <p className="mt-5">
               <a
@@ -262,7 +262,7 @@ function Index() {
             Les ouvrages que nous posons
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-neutral">
-            Illustrations des ouvrages que nous installons — photos de nos chantiers à venir
+            Illustrations des ouvrages que nous installons. Photos de nos chantiers à venir
           </p>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
@@ -284,7 +284,7 @@ function Index() {
         </div>
       </section>
 
-      {/* Lead magnet — guide gratuit */}
+      {/* Lead magnet : guide gratuit */}
       <LeadMagnet />
 
       {/* 4. OBJECTIONS + FAQ */}
@@ -338,10 +338,10 @@ function Index() {
 
       <footer className="border-t border-border bg-background py-10 text-center">
         <SiteLogo className="mx-auto" />
-        <p className="mt-1 text-sm text-muted-foreground">Magny Fomat Michel — Menuisier poseur</p>
-        <p className="mt-1 text-xs text-muted-foreground">Hérault & Gard — Neuf et rénovation</p>
+        <p className="mt-1 text-sm text-muted-foreground">Magny Fomat Michel, menuisier poseur</p>
+        <p className="mt-1 text-xs text-muted-foreground">Hérault & Gard, neuf et rénovation</p>
         <p className="mt-3 text-xs text-muted-foreground">SIRET 94836674500016</p>
-        <p className="mt-1 text-xs text-muted-foreground">Assuré AMI 3F Assurances — garantie décennale</p>
+        <p className="mt-1 text-xs text-muted-foreground">Assuré AMI 3F Assurances, garantie décennale</p>
         <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs font-bold text-primary">
           <Link to="/mentions-legales" className="hover:underline">Mentions légales</Link>
           <Link to="/confidentialite" className="hover:underline">Politique de confidentialité</Link>
