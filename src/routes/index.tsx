@@ -33,17 +33,17 @@ const WHATSAPP = "https://wa.me/33652142690?text=Bonjour%2C%20je%20souhaite%20un
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VISAVIE Fermeture — Menuisier poseur Hérault & Gard" },
+      { title: "VISAVIE Fermeture — Menuisier poseur en Hérault et Gard" },
       {
         name: "description",
         content:
-          "Pose de menuiseries alu, bois et PVC dans l'Hérault et le Gard : portes, fenêtres, volets roulants, portails et clôtures. Devis gratuit, réponse sous 48 h.",
+          "Pose de fenêtres, portes, portails et volets en alu, PVC et bois. Neuf et rénovation, particuliers et professionnels. Devis gratuit sous 48 h.",
       },
-      { property: "og:title", content: "VISAVIE Fermeture — Menuisier poseur Hérault & Gard" },
+      { property: "og:title", content: "VISAVIE Fermeture — Menuisier poseur en Hérault et Gard" },
       {
         property: "og:description",
         content:
-          "Votre artisan menuisier poseur près de chez vous. Neuf et rénovation, particuliers et professionnels. Devis gratuit sous 48 h.",
+          "Vous avez les menuiseries, il vous manque le poseur. Michel, menuisier poseur indépendant en Hérault et Gard. Devis gratuit sous 48 h.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -135,13 +135,16 @@ function Index() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-secondary/90 via-secondary/80 to-secondary/95" />
         <div className="mx-auto max-w-3xl px-5 py-20 text-center sm:py-28">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/60 px-4 py-1.5 text-xs font-semibold tracking-widest text-gold uppercase">
-            <MapPin className="size-3.5" aria-hidden="true" /> Hérault & Gard
+            <MapPin className="size-3.5" aria-hidden="true" /> Menuisier poseur · Hérault & Gard
           </p>
           <h1 className="text-4xl leading-[1.05] text-secondary-foreground sm:text-6xl">
-            Vous avez de grands projets ?
+            Vous avez les menuiseries.
+            <br />
+            Il vous manque le poseur.
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-neutral sm:text-xl">
-            Votre menuisier poseur près de chez vous le réalise.
+            Michel, menuisier poseur indépendant en Hérault et Gard. Alu, PVC, bois — neuf et
+            rénovation, pour les particuliers comme pour les professionnels.
           </p>
           <div className="mt-10">
             <CtaButton className="w-full px-8 py-5 text-base sm:w-auto sm:text-xl">
@@ -149,6 +152,15 @@ function Index() {
             </CtaButton>
             <p className="mt-4 text-sm text-neutral">
               Réponse sous 48 h — devis gratuit et sans engagement.
+            </p>
+            <p className="mt-5">
+              <a
+                href="#devis"
+                onClick={() => window.dispatchEvent(new CustomEvent("visavie:prefill-pro"))}
+                className="text-sm text-gold underline underline-offset-4 hover:text-gold/80"
+              >
+                Vous êtes un professionnel ? Parlons sous-traitance
+              </a>
             </p>
           </div>
         </div>
@@ -214,7 +226,7 @@ function Index() {
             },
             {
               icon: Hammer,
-              value: <Counter to={100} prefix="+" />,
+              value: <Counter to={50} prefix="+" />,
               title: "projets réalisés",
               desc: "Chantiers neufs et rénovations livrés dans l'Hérault et le Gard.",
             },
@@ -277,7 +289,6 @@ function Index() {
 
       {/* 4. OBJECTIONS + FAQ */}
       <section id="faq" className="mx-auto max-w-3xl scroll-mt-20 px-5 py-16 sm:py-20">
-
         <div className="space-y-4">
           {faq.map((f) => (
             <FaqItem key={f.question} question={f.question} answer={f.answer} />
