@@ -80,7 +80,7 @@ export function QuoteForm() {
           <Check className="size-6" aria-hidden="true" />
         </span>
         <p className="mt-5 font-display text-xl text-foreground">
-          Merci, votre demande est bien reçue. Michel vous rappelle sous 48 h.
+          Merci, votre demande est bien reçue. Je vous rappelle sous 48 h.
         </p>
       </div>
     );
@@ -168,7 +168,7 @@ export function QuoteForm() {
       {error && <p role="alert" className="text-sm font-bold text-primary">{error}</p>}
       <Button type="submit" disabled={loading} className="cta-btn h-auto w-full px-6 py-4 text-sm">
         {loading ? <Loader2 className="animate-spin" aria-hidden="true" /> : <Send aria-hidden="true" />}
-        Demandez votre devis gratuit
+        Envoyer ma demande
       </Button>
     </form>
   );
