@@ -15,6 +15,7 @@ import {
   UserRound,
   FileText,
   BadgeCheck,
+  Instagram,
 } from "lucide-react";
 
 import heroImg from "@/assets/hero-menuiserie-sans-marque.jpg";
@@ -65,7 +66,7 @@ const engagements = [
   {
     icon: UserRound,
     title: "Un interlocuteur unique",
-    text: "Michel vous suit du premier appel à la pose.",
+    text: "Je vous suis du premier appel à la pose.",
   },
   {
     icon: FileText,
@@ -80,7 +81,7 @@ const engagements = [
   {
     icon: BadgeCheck,
     title: "Assurance décennale",
-    text: "Contrat AMI 3F Assurances, attestation sur demande.",
+    text: "Contrat AMI 3F Assurances. Attestation et attestation de vigilance URSSAF sur demande.",
   },
 ];
 
@@ -88,17 +89,22 @@ const faq = [
   {
     question: "Vous intervenez uniquement à Montpellier ?",
     answer:
-      "Nous sommes disponibles dans le département de l'Hérault et dans le Gard jusqu'à Arles, Nîmes.",
+      "J'interviens dans tout l'Hérault et dans le Gard jusqu'à Nîmes et Arles, en passant par Castelnau-le-Lez, Lunel, Sète et Alès.",
   },
   {
     question: "Travaillez-vous le PVC et l'aluminium ?",
     answer:
-      "Nous assurons la pose d'une large gamme de menuiseries PVC et aluminium, adaptées aussi bien aux projets de rénovation qu'aux exigences thermiques et esthétiques actuelles.",
+      "J'assure la pose d'une large gamme de menuiseries PVC et aluminium, adaptées aussi bien aux projets de rénovation qu'aux exigences thermiques et esthétiques actuelles.",
   },
   {
     question: "Assurez-vous la pose complète ?",
     answer:
-      "Absolument, nous assurons la pose complète de vos menuiseries, dans le respect des normes et avec un souci constant de qualité et de finition.",
+      "Oui, j'assure la pose complète de vos menuiseries, dans le respect des normes et avec un souci constant de qualité et de finition.",
+  },
+  {
+    question: "Travaillez-vous en sous-traitance pour d'autres entreprises ?",
+    answer:
+      "Oui. J'interviens en renfort de pose pour les menuisiers, les entreprises de TP et les constructeurs, sur un chantier ponctuel comme sur une série. Attestation de garantie décennale et attestation de vigilance URSSAF fournies sur simple demande, avant le premier chantier.",
   },
 ];
 
@@ -133,22 +139,23 @@ function Index() {
           className="absolute inset-0 -z-10 size-full object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-secondary/90 via-secondary/80 to-secondary/95" />
-        <div className="mx-auto max-w-3xl px-5 py-20 text-center sm:py-28">
+        <div className="mx-auto max-w-3xl px-5 py-14 text-center sm:py-28">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/60 px-4 py-1.5 text-xs font-semibold tracking-widest text-gold uppercase">
             <MapPin className="size-3.5" aria-hidden="true" /> Menuisier poseur · Hérault & Gard
           </p>
-          <h1 className="text-4xl leading-[1.05] text-secondary-foreground sm:text-6xl">
+          <p className="mb-2 font-display text-lg text-gold sm:text-2xl">
             Vous avez les menuiseries.
-            <br />
+          </p>
+          <h1 className="text-[2rem] leading-[1.1] text-balance text-secondary-foreground sm:text-5xl lg:text-6xl">
             Il vous manque le poseur.
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-neutral sm:text-xl">
+          <p className="mx-auto mt-5 max-w-xl text-base text-neutral sm:mt-6 sm:text-xl">
             Michel, menuisier poseur indépendant en Hérault et Gard. Alu, PVC, bois. Neuf et
             rénovation, pour les particuliers comme pour les professionnels.
           </p>
-          <div className="mt-10">
+          <div className="mt-8 sm:mt-10">
             <CtaButton className="w-full px-8 py-5 text-base sm:w-auto sm:text-xl">
-              Demandez votre DEVIS gratuit
+              Demander un devis gratuit
             </CtaButton>
             <p className="mt-4 text-sm text-neutral">
               Réponse sous 48 h, devis gratuit et sans engagement.
@@ -172,8 +179,12 @@ function Index() {
           Particuliers <span className="text-primary">&</span> professionnels
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
-          Entreprises de TP, menuisiers, syndics, architectes ou propriétaires : nous posons vos
+          Entreprises de TP, menuisiers, syndics, architectes ou propriétaires : je pose vos
           ouvrages avec la même exigence de finition.
+        </p>
+        <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-muted-foreground">
+          J'interviens à Montpellier, Castelnau-le-Lez, Lunel, Sète, Nîmes, Alès et dans les
+          communes alentour.
         </p>
         <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
           {services.map((s) => (
@@ -259,10 +270,10 @@ function Index() {
       <section id="ouvrages" className="scroll-mt-20 bg-secondary py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-5">
           <h2 className="text-center text-2xl text-secondary-foreground sm:text-3xl">
-            Les ouvrages que nous posons
+            Les ouvrages que je pose
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-neutral">
-            Illustrations des ouvrages que nous installons. Photos de nos chantiers à venir
+            Images d'illustration. Les photos des chantiers de Michel arrivent.
           </p>
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
@@ -319,7 +330,7 @@ function Index() {
           <div className="text-center">
             <h2 className="text-3xl sm:text-4xl">Demandez votre devis gratuit</h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              Décrivez votre projet. Michel vous répond sous 48 h avec une première estimation claire et sans engagement.
+              Décrivez votre projet. Je vous réponds sous 48 h avec une première estimation claire et sans engagement.
             </p>
           </div>
           <div className="mt-10 rounded-lg border border-border bg-card p-6 shadow-[var(--shadow-card)] sm:p-8">
@@ -346,7 +357,15 @@ function Index() {
           <Link to="/mentions-legales" className="hover:underline">Mentions légales</Link>
           <Link to="/confidentialite" className="hover:underline">Politique de confidentialité</Link>
           <a href="mailto:visaviefermeture@gmail.com" className="inline-flex items-center gap-1 hover:underline">
-            <Mail className="size-3.5" aria-hidden="true" /> Nous écrire
+            <Mail className="size-3.5" aria-hidden="true" /> Écrire à Michel
+          </a>
+          <a
+            href="https://www.instagram.com/visavie.fermeture/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 hover:underline"
+          >
+            <Instagram className="size-3.5" aria-hidden="true" /> Instagram
           </a>
         </div>
       </footer>
