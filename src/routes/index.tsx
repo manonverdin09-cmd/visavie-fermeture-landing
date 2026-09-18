@@ -153,7 +153,7 @@ function Index() {
             Vous avez de grands projets ?
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-neutral sm:text-xl">
-            Votre artisan près de chez vous le réalise.
+            Votre menuisier poseur près de chez vous le réalise.
           </p>
           <div className="mt-10">
             <CtaButton className="w-full px-8 py-5 text-base sm:w-auto sm:text-xl">
