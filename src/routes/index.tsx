@@ -270,7 +270,7 @@ function Index() {
       <section id="ouvrages" className="scroll-mt-20 bg-secondary py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-5">
           <h2 className="text-center text-2xl text-secondary-foreground sm:text-3xl">
-            Les ouvrages que je pose
+            Mon savoir-faire
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-neutral">
             Images d'illustration. Les photos des chantiers de Michel arrivent.
