@@ -126,24 +126,39 @@ function CtaButton({
 }
 
 function Index() {
+  // Ouverture toujours en haut de page
   useEffect(() => {
     if (typeof window === "undefined") return;
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
+    if (window.location.hash) return;
+
+    let pinning = true;
     const toTop = () => {
-      if (!window.location.hash) window.scrollTo(0, 0);
+      if (pinning && window.scrollY !== 0) {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+      }
     };
+    const release = () => {
+      pinning = false;
+    };
+
     toTop();
-    const raf = window.requestAnimationFrame(toTop);
-    const timer = window.setTimeout(toTop, 400);
+    const interval = window.setInterval(toTop, 50);
+    const timeout = window.setTimeout(release, 2000);
+    window.addEventListener("touchstart", release, { passive: true });
+    window.addEventListener("wheel", release, { passive: true });
+    window.addEventListener("keydown", release);
     window.addEventListener("pageshow", toTop);
-    window.addEventListener("load", toTop);
+
     return () => {
-      window.cancelAnimationFrame(raf);
-      window.clearTimeout(timer);
+      window.clearInterval(interval);
+      window.clearTimeout(timeout);
+      window.removeEventListener("touchstart", release);
+      window.removeEventListener("wheel", release);
+      window.removeEventListener("keydown", release);
       window.removeEventListener("pageshow", toTop);
-      window.removeEventListener("load", toTop);
     };
   }, []);
 
