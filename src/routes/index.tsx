@@ -131,9 +131,20 @@ function Index() {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
-    if (!window.location.hash) {
-      window.scrollTo(0, 0);
-    }
+    const toTop = () => {
+      if (!window.location.hash) window.scrollTo(0, 0);
+    };
+    toTop();
+    const raf = window.requestAnimationFrame(toTop);
+    const timer = window.setTimeout(toTop, 400);
+    window.addEventListener("pageshow", toTop);
+    window.addEventListener("load", toTop);
+    return () => {
+      window.cancelAnimationFrame(raf);
+      window.clearTimeout(timer);
+      window.removeEventListener("pageshow", toTop);
+      window.removeEventListener("load", toTop);
+    };
   }, []);
 
   return (
