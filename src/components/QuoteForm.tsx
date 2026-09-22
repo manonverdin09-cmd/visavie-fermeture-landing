@@ -18,6 +18,46 @@ const projectTypes = [
 
 const PRO_TYPE = "Professionnel - sous-traitance de pose";
 
+const HUBSPOT_ENDPOINT =
+  "https://api-eu1.hsforms.com/submissions/v3/integration/submit/149364873/72656e66-e017-40f1-b16d-5837138c4ccd";
+
+type QuoteData = {
+  name: string;
+  phone: string;
+  email: string;
+  projectType: string;
+  message: string;
+};
+
+async function sendToHubspot(data: QuoteData) {
+  const details = [`Type de projet : ${data.projectType}`, data.message.trim()]
+    .filter(Boolean)
+    .join("\n\n");
+
+  await fetch(HUBSPOT_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      fields: [
+        { objectTypeId: "0-1", name: "lastname", value: data.name },
+        { objectTypeId: "0-1", name: "email", value: data.email },
+        { objectTypeId: "0-1", name: "phone", value: data.phone },
+        { objectTypeId: "0-1", name: "message", value: details },
+      ],
+      context: {
+        pageUri: window.location.href,
+        pageName: document.title,
+      },
+      legalConsentOptions: {
+        consent: {
+          consentToProcess: true,
+          text: "J'accepte d'être recontacté au sujet de mon projet",
+        },
+      },
+    }),
+  });
+}
+
 const quoteSchema = z.object({
   name: z.string().trim().min(1, "Votre nom est requis").max(100, "Nom trop long"),
   phone: z
@@ -26,7 +66,7 @@ const quoteSchema = z.object({
     .min(6, "Numéro de téléphone invalide")
     .max(30, "Numéro de téléphone invalide")
     .regex(/^[0-9+\s().-]{6,30}$/, "Numéro de téléphone invalide"),
-  email: z.union([z.literal(""), z.string().trim().email("Adresse email invalide").max(255)]),
+  email: z.string().trim().min(1, "Votre email est requis").email("Adresse email invalide").max(255),
   projectType: z.enum(projectTypes, { required_error: "Sélectionnez votre type de projet" }),
   message: z.string().trim().max(2000, "Message trop long"),
   consent: z.literal(true, { errorMap: () => ({ message: "Votre accord est nécessaire" }) }),
@@ -59,11 +99,18 @@ export function QuoteForm() {
     const { error: dbError } = await supabase.from("quote_requests").insert({
       name: parsed.data.name,
       phone: parsed.data.phone,
-      email: parsed.data.email || null,
+      email: parsed.data.email,
       project_type: parsed.data.projectType,
       message: parsed.data.message || null,
       consent: parsed.data.consent,
     });
+
+    try {
+      await sendToHubspot(parsed.data);
+    } catch {
+      // La demande est déjà enregistrée, on ne bloque pas le visiteur.
+    }
+
     setLoading(false);
 
     if (dbError) {
@@ -117,7 +164,7 @@ export function QuoteForm() {
         </label>
       </div>
       <label className="block space-y-2 text-sm font-bold text-foreground">
-        Email
+        Email <span className="text-primary">*</span>
         <Input
           name="email"
           type="email"
