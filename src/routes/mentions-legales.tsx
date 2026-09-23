@@ -35,7 +35,7 @@ function LegalNotices() {
           <section><h2 className="text-xl text-foreground">Directeur de la publication</h2><p className="mt-3">Magny Fomat Michel.</p></section>
           <section><h2 className="text-xl text-foreground">Assurance professionnelle</h2><p className="mt-3">Assurance décennale AMI 3F Assurances, contrat n° SV75020721/12745. Couverture : France métropolitaine.</p></section>
           <section><h2 className="text-xl text-foreground">TVA</h2><p className="mt-3">TVA non applicable, article 293 B du Code général des impôts.</p></section>
-          <section><h2 className="text-xl text-foreground">Hébergement</h2><p className="mt-3">Lovable Labs Incorporated / Lovable Labs Sweden AB<br />Regeringsgatan 25, 111 53 Stockholm, Suède<br />Email : <a className="text-primary hover:underline" href="mailto:support@lovable.dev">support@lovable.dev</a></p></section>
+          <section><h2 className="text-xl text-foreground">Hébergement</h2><p className="mt-3">Netlify, Inc.<br />101 2nd Street, San Francisco, CA 94105, États-Unis<br />Site : <a className="text-primary hover:underline" href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">www.netlify.com</a></p></section>
         </div>
       </article>
     </main>
