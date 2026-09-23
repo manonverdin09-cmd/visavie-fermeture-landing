@@ -6,9 +6,13 @@ import { supabase } from "@/integrations/supabase/client";
 
 const GUIDE_URL = "/guide-menuiserie-visavie-fermeture.pdf";
 
+const HUBSPOT_ENDPOINT =
+  "https://api-eu1.hsforms.com/submissions/v3/integration/submit/149364873/1f4646c7-9d8e-4251-ba40-1b194b582c6a";
+
 const leadSchema = z.object({
   lastName: z.string().trim().min(1, "Votre nom est requis").max(100, "Nom trop long"),
   firstName: z.string().trim().min(1, "Votre prénom est requis").max(100, "Prénom trop long"),
+  email: z.string().trim().min(1, "Votre email est requis").email("Adresse email invalide").max(255),
   phone: z
     .string()
     .trim()
@@ -16,6 +20,33 @@ const leadSchema = z.object({
     .max(30, "Numéro de téléphone invalide")
     .regex(/^[0-9+\s().-]{6,30}$/, "Numéro de téléphone invalide"),
 });
+
+type LeadData = z.infer<typeof leadSchema>;
+
+async function sendToHubspot(data: LeadData) {
+  await fetch(HUBSPOT_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      fields: [
+        { objectTypeId: "0-1", name: "firstname", value: data.firstName },
+        { objectTypeId: "0-1", name: "lastname", value: data.lastName },
+        { objectTypeId: "0-1", name: "email", value: data.email },
+        { objectTypeId: "0-1", name: "phone", value: data.phone },
+      ],
+      context: {
+        pageUri: window.location.href,
+        pageName: document.title,
+      },
+      legalConsentOptions: {
+        consent: {
+          consentToProcess: true,
+          text: "J'accepte d'être recontacté au sujet de mon projet",
+        },
+      },
+    }),
+  });
+}
 
 const points = [
   "Définir clairement votre besoin",
@@ -25,7 +56,7 @@ const points = [
 ];
 
 export function LeadMagnet() {
-  const [form, setForm] = useState({ lastName: "", firstName: "", phone: "" });
+  const [form, setForm] = useState({ lastName: "", firstName: "", email: "", phone: "" });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -45,6 +76,13 @@ export function LeadMagnet() {
       phone: parsed.data.phone,
       source: "guide-menuiserie",
     });
+
+    try {
+      await sendToHubspot(parsed.data);
+    } catch {
+      // La demande est déjà enregistrée, on ne bloque pas le visiteur.
+    }
+
     setLoading(false);
     if (dbError) {
       setError("Une erreur est survenue. Merci de réessayer dans un instant.");
@@ -130,6 +168,22 @@ export function LeadMagnet() {
                     maxLength={100}
                     value={form.firstName}
                     onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lm-email" className="sr-only">
+                    Email
+                  </label>
+                  <input
+                    id="lm-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="Email"
+                    maxLength={255}
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
                     className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
                   />
                 </div>
